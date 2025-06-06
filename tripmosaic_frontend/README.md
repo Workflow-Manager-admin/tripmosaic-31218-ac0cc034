@@ -1,69 +1,37 @@
 # TripMosaic Frontend (Vistara): AI Travel Itinerary Planner
 
-Vistara (TripMosaic) is an AI-powered travel planner that generates personalized day-by-day itineraries based on your destination, budget, travel dates, interests, and preferences. Enjoy a seamless, modern, and responsive experience built with React, Vite, and TailwindCSS.
+Vistara (TripMosaic) is a modern AI-powered travel planner that generates customized, day-by-day itineraries and recommendations for your trips—tailored to your destination, budget, interests, pace, and preferences. The web frontend is built to be fast, user-friendly, and developer-extensible using React, Vite, and TailwindCSS.
 
 ---
 
-## Table of Contents
+## Documentation Overview
 
 - [Features](#features)
-- [Architecture](#architecture)
-- [Installation & Usage](#installation--usage)
-- [Configuration / Environment](#configuration--environment)
+- [Getting Started (Usage & Onboarding)](#installation--usage)
+- [Configuration & Environment](#configuration--environment)
 - [Customization](#customization)
+- [Architecture Summary](#architecture-summary)
 - [Folder Structure](#folder-structure)
 - [Available Scripts](#available-scripts)
 - [Contributing](#contributing)
 - [Learn More](#learn-more)
 - [License](#license)
+- [Known Issues / Troubleshooting](#known-issues--troubleshooting)
+- [Comprehensive Architecture & App Documentation](#detailed-documentation)
 
 ---
 
 ## Features
 
-- **Personalized Itinerary Generation**: Creates a detailed, day-by-day travel plan based on inputs such as destination, interests, budget, and trip pace.
-- **AI-Powered Recommendations**: Utilizes Gemini AI to suggest attractions, restaurants, and accommodations tailored to individual preferences.
-- **Budget & Accommodation Matching**: Recommends suitable hotels, hostels, or Airbnbs within entered budget constraints.
-- **Travel Tips & Local Insights**: Provides daily tips, local customs, transportation, and weather considerations.
-- **Hidden Gems & Day Trips**: Suggests off-the-beaten-path activities and optional nearby excursions.
-- **Seamless UI/UX**: Modern and responsive UI/UX using React and TailwindCSS.
-- **User Authentication & Data Storage**: Secure user authentication and trip data storage using Firebase.
-- **Export to PDF**: Download your generated itinerary as a PDF.
-
----
-
-## Architecture
-
-**Frontend**:  
-- **Framework:** Vite  
-- **UI Library:** React 18
-- **Styling:** TailwindCSS 3  
-- **State Management:** React Context API (Theme)  
-- **Authentication:** Google OAuth via @react-oauth/google  
-- **External APIs:** Google Gemini AI (generative travel plans), Google Places API (autocomplete, details, photos)  
-- **Persistence:** Firebase (for user trips and data)
-
-**Key Structure:**
-```
-src/
-  App.jsx                  # Main entry point
-  main.jsx                 # Renders app and sets up context, router
-  context/                 # Theme context/provider
-  hooks/                   # Custom React hooks (PDF export, trip fetch, etc.)
-  components/              # Core and UI components (Navbar, Footer, dialogs, cards)
-  pages/                   # Route-based view components (Hero, CreateTrip, ViewTrip, MyTrips)
-  services/                # API integrations (AIModel, Places, Firebase)
-  utils/                   # Constants and helper files
-  assets/                  # Images and static assets
-```
-
-**Typical Flow:**
-1. User lands on Hero page, authenticates with Google.
-2. User fills in trip requirements on CreateTrip form.
-3. AI (Gemini) generates itinerary and hotel recommendations.
-4. Generated trip is saved in Firebase per user.
-5. Trips can be viewed, exported as PDF, or revisited in MyTrips.
-6. Theme can be toggled (dark/light).
+- **Personalized AI Itinerary Generation:** Day-by-day travel plans based on user input: destination, time, interests, party size, and budget.
+- **AI-Powered Recommendations:** Integrates Google Gemini AI and Google/Geoapify APIs to choose attractions, stays, and meals.
+- **Budget & Accommodation Advisor:** Suggests hotels/hostels/Airbnbs matched by type and budget.
+- **Travel Tips & Local Insights:** Adds tips, weather, and local advice per day/plan section.
+- **Hidden Gems & Day Trips:** Uncovers off-beat places and nearby excursions.
+- **Seamless UI/UX:** Responsive, theme-aware interface (supports light/dark mode, mobile/desktop).
+- **User Auth & Data Storage:** Google OAuth with secure Firebase persistence.
+- **Export to PDF:** Download any itinerary as an attractive PDF snapshot.
+- **Rich UI Components:** Modals, tables, popovers, cards, and more—easy to extend.
 
 ---
 
@@ -81,15 +49,19 @@ cd tripmosaic_frontend
 npm install
 ```
 
-### Start the development server
+### Run the development server
 
 ```bash
 npm run dev -- --port 5123
 ```
 
-Open http://localhost:5123 in your browser.
+View at [http://localhost:5123](http://localhost:5123).
 
-> **Google OAuth/Firebase:** The app comes pre-configured with demo API keys and Firebase setup. For production, update the API keys inside `src/services/AIModel.js`, `src/services/GlobalAPI.jsx`, and `src/services/firebase.js` with your own credentials.
+> **Google OAuth/Firebase:** The default configuration includes demo API keys and Firebase credentials. To use in production, supply your own in:
+>
+> - `src/services/AIModel.js`
+> - `src/services/GlobalAPI.jsx`
+> - `src/services/firebase.js`
 
 ### Build for production
 
@@ -107,60 +79,80 @@ npm run lint
 
 ## Configuration & Environment
 
-- **Port:** Default dev server port is `5123` (see `vite.config.js`)
-- **Theme:** Defaults to system preference, can be toggled between light/dark.
-- **API Keys:** See above for updating your own keys.
+- **Port:** Defaults to 5123 (see `vite.config.js`)
+- **Demo API Keys/Secrets:** Change before production deployment.
+- **Theme:** Matches system but can be toggled (ThemeContext).
+- **Firebase/Google OAuth:** Refer to detailed docs for setup.
 
 ---
 
 ## Customization
 
-- **Brand Colors:** Tailwind & CSS variables in `src/index.css`
-- **Component Styles:** Tailwind classes throughout. Custom UI in `/components/ui/`.
-- **Trip Planning Logic:** Modify constants, prompt template, or Gemini AI integration in `src/utils/constants.js` and `src/services/AIModel.js`
-- **Authentication:** Uses Google OAuth. Can be replaced with other providers.
-- **Persistent Data:** Default Firebase project for demo. Swap for your own.
+- **Colors/Branding:** Edit in `src/index.css` (TailwindCSS + CSS vars).
+- **Component Styling:** Extend or modify components in `/components` or `/components/ui`.
+- **Trip Generation Tuning:** Edit prompt logic in `src/utils/constants.js`, `src/services/AIModel.js`.
+- **Authentication Method:** Swap Google OAuth for other provider if desired.
+
+---
+
+## Architecture Summary
+
+The frontend is organized for clean separation of UI, API, business logic, and persistent storage.
+
+- **Frontend Stack:** React 18, Vite, TailwindCSS, React Context API, Radix UI primitives, class-variance-authority, lucide-react, react-hot-toast, jsPDF, react-router-dom.
+- **External Integrations:** Google Gemini AI (itinerary/plan generation), Google Places, Geoapify, Firebase.
+- **State/Data:** ThemeContext for global style; user/trip data managed in Firebase and React hooks.
+- **Routing:** Single Page App, client routing for views (main, create, view, my trips).
+
+**For detailed flow, component, and API/service maps, see the [full application and architecture documentation](../kavia-docs/tripmosaic-frontend-architecture.md).**
 
 ---
 
 ## Folder Structure
 
-See [Architecture](#architecture) for high-level breakdown.
-
-Notable folders:
-- `src/components/`: Page/layout UI (navbar, cards, dialogs, etc.)
-- `src/pages/`: Route-level views (Hero, CreateTrip, MyTrips, ViewTrip, About, Testimonials)
-- `src/hooks/`: Custom logic (fetch user, generate PDF, get photo URL, etc.)
-- `src/services/`: Firebase, AI, Google Places integration
+```
+src/
+  App.jsx            # Theme context, router entry
+  main.jsx           # React root, provider setup, routing
+  assets/            # Images, logos, etc.
+  components/        # Feature and UI shared components
+    ui/              # Custom UI primitives (dialogs, buttons, etc.)
+  context/           # ThemeContext and provider
+  hooks/             # Custom React hooks (PDF, auth, fetch, view trip, etc.)
+  pages/             # Major route views: Hero, CreateTrip, MyTrips, ViewTrip, About, Testimonials
+  services/          # AI, API, Firebase hooks/modules
+  utils/             # Constants, static data, video JSON
+```
 
 ---
 
 ## Available Scripts
 
-- `npm run dev` - Start dev server
-- `npm run build` - Production build
-- `npm run lint` - Run ESLint
+- `npm run dev` — Start dev server
+- `npm run build` — Production build
+- `npm run lint` — Run ESLint
 
 ---
 
 ## Contributing
 
-1. Fork and clone this repo.
-2. Create a new feature/bugfix branch.
-3. Test thoroughly before PR.
-4. Adhere to project code style and write descriptive commit messages.
+1. Fork/clone this repository.
+2. Create a descriptive branch name for features/bugfixes.
+3. Follow code style and project structure; write meaningful commit messages.
+4. Test thoroughly before opening PRs.
 
 ---
 
 ## Learn More
 
-- [React Documentation](https://reactjs.org/)
-- [Vite Documentation](https://vitejs.dev/)
-- [TailwindCSS Docs](https://tailwindcss.com/)
+- [React documentation](https://reactjs.org/)
+- [Vite documentation](https://vitejs.dev/)
+- [TailwindCSS](https://tailwindcss.com/)
 - [Google Gemini AI](https://ai.google.dev/)
-- [Firebase Documentation](https://firebase.google.com/docs/)
+- [Firebase](https://firebase.google.com/docs/)
 - [Radix UI Primitives](https://www.radix-ui.com/docs/primitives/overview/getting-started)
 - [Geoapify Places API](https://apidocs.geoapify.com/docs/places/)
+- [jsPDF](https://github.com/parallax/jsPDF)
 
 ---
 
@@ -170,10 +162,26 @@ MIT © Vistara/TripMosaic
 
 ---
 
-### Known Issues / Troubleshooting
+## Known Issues / Troubleshooting
 
-- **Google/Firebase API keys** in this demo are for sample use. For deployment, use your own credentials.
-- **Image Loading**: If Google Places fails to return images, default placeholders are used.
-- **PDF Export**: Supports most itineraries but may be limited by jsPDF capabilities for very long trips.
+- **Google/Firebase API keys**: Demo keys only, replace for real/production deployment.
+- **Image Loading**: If Google Places API does not return images, a placeholder is shown instead.
+- **PDF Export**: Large itineraries may be subject to PDF formatting limitations.
+
+---
+
+## Detailed Documentation
+
+For an in-depth discussion of application workflows, architectural diagrams, developer guidance, component breakdowns, and a mermaid overview, refer to:
+
+➡️ [`kavia-docs/tripmosaic-frontend-architecture.md`](../kavia-docs/tripmosaic-frontend-architecture.md)
+
+This living document covers:
+- End-to-end flow and major lifecycle events in the app
+- Component and service interaction diagrams
+- Developer onboarding and environment setup
+- Customization/personalization tips
+- API and integration references
+- UI/UX architecture, theming, and more
 
 ---
