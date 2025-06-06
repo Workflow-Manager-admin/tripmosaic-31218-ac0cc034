@@ -30,6 +30,8 @@ export default defineConfig({
       // PUBLIC_INTERFACE
       // Added to allow requests from the required VSCode cloud host
       'vscode-internal-3043-beta.beta01.cloud.kavia.ai',
+      // Also allow the new requested internal VSCode host (for beta)
+      'vscode-internal-8851-beta.beta01.cloud.kavia.ai',
     ],
   },
 });
