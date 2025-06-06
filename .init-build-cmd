@@ -1,0 +1,4 @@
+{
+    "command": "npm install && npm run build",
+    "working_directory": "/home/kavia/workspace/code-generation/tripmosaic-31218-ac0cc034/tripmosaic_frontend"
+}
