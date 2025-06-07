@@ -1,8 +1,21 @@
+/**
+ * ============================================================================
+ *  Generated/curated by Kavia AI: Footer.jsx - Application Footer and Social Links
+ *  Renders dynamic copyright, developer credit, and social media links.
+ *  Styles and colors adapt to theme. All links are external (new tab, secured).
+ * ============================================================================
+ */
+
 import { FOOTER_DESCRIPTION } from "../utils/constants";
 import { useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
 import { FaGithub, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
 
+// PUBLIC_INTERFACE
+/**
+ * Footer component displays copyright, developer, and social icons at the page bottom.
+ * Dynamically switches styles for dark/light theme. All social icons link out securely.
+ */
 const Footer = () => {
   const { theme } = useContext(ThemeContext);
 
@@ -16,14 +29,14 @@ const Footer = () => {
     >
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col items-center justify-center text-center">
-          {/* Main description */}
+          {/* App-wide footer description - see src/utils/constants.js */}
           <p className={`text-sm lg:text-base font-medium max-w-2xl ${
             theme === "dark" ? "text-gray-300" : "text-orange-800"
           }`}>
             {FOOTER_DESCRIPTION}
           </p>
           
-          {/* Social Links */}
+          {/* Social Icons/Links (open new tab, ARIA-labeled for a11y) */}
           <div className="flex gap-4 mt-6">
             <a 
               href="https://github.com/Cyb3rHash" 
@@ -79,7 +92,7 @@ const Footer = () => {
             </a>
           </div>
           
-          {/* Copyright */}
+          {/* Dynamic copyright */}
           <p className={`mt-6 text-xs ${
             theme === "dark" ? "text-gray-400" : "text-orange-600"
           }`}>
