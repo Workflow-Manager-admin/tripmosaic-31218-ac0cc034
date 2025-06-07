@@ -1,3 +1,11 @@
+/**
+ * ============================================================================
+ *  Generated/curated by Kavia AI: Hero.jsx - Main landing/hero section logic.
+ *  This file renders the app's landing section, includes authentication hooks,
+ *  CTA navigation, and app branding. All logic has in-line comments for clarity.
+ * ============================================================================
+ */
+
 import EiRa from "../assets/EiRa1.png";
 import logo2 from "../assets/logo.jpg";
 import { NavLink, Link } from "react-router-dom";
@@ -9,9 +17,13 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 
+// PUBLIC_INTERFACE
+// The Hero component renders the introductory landing section for the app.
 const Hero = () => {
+  // Local state to track authenticated user (null if unauthenticated)
   const [user, setUser] = useState(null);
 
+  // Load user info from local storage if available at mount
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -19,11 +31,17 @@ const Hero = () => {
     }
   }, []);
 
+  // Initiate Google OAuth login on click
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => GenerateUserProfile(codeResponse),
     onError: (error) => console.log("Login Failed:", error),
   });
 
+  /**
+   * Fetches user profile from Google after successful OAuth.
+   * Stores basic user details in localStorage for session use.
+   * @param tokenInfo OAuth credential object from Google sign-in
+   */
   const GenerateUserProfile = async (tokenInfo) => {
     try {
       const response = await axios.get(
@@ -35,10 +53,10 @@ const Hero = () => {
           },
         }
       );
-
+      // Persist info locally for access across reloads
       localStorage.setItem("user", JSON.stringify(response.data));
       setUser(response.data);
-      // setOpenDialogue(false); // The dialog functionality has been removed as it's unused.
+      // setOpenDialogue(false); // Kavia AI: dialog removed for UX simplicity
     } catch (err) {
       console.error("Error fetching user info:", err);
     }
@@ -46,7 +64,7 @@ const Hero = () => {
 
   return (
     <div className="mt-10 pt-4 lg:px-0 px-8 transition-all duration-300">
-      {/* Logo + Brand */}
+      {/* === Branding/Logo Section === */}
       <div className="flex mb-5 items-center justify-center mx-auto gap-3 w-auto">
         <img
           className="border-2 border-accent h-20 w-20 rounded-full"
@@ -58,7 +76,7 @@ const Hero = () => {
         </Link>
       </div>
 
-      {/* Headline */}
+      {/* === Title & Description Section === */}
       <div className="lg:px-72 flex items-center flex-col text-center gap-8">
         <h2 className="lg:text-7xl text-4xl font-bold text-primary dark:text-primary">
           {HERO.title}
@@ -67,7 +85,7 @@ const Hero = () => {
           {HERO.titleDescription}
         </p>
 
-        {/* CTA Button */}
+        {/* === Main Call-to-Action Button === */}
         <NavLink
           to={"/create-trip"}
           className="bg-primary hover:bg-accent text-primary-foreground transition-colors duration-200 lg:text-xl text-lg font-medium py-3 lg:px-10 px-6 rounded-full shadow-lg"
@@ -75,7 +93,7 @@ const Hero = () => {
           {HERO.buttonLable}
         </NavLink>
 
-        {/* Google Login Button */}
+        {/* === Google OAuth login button, only if user isn't logged in === */}
         {!user && (
           <button
             onClick={login}
@@ -86,7 +104,7 @@ const Hero = () => {
         )}
       </div>
 
-      {/* Subsections */}
+      {/* === Main subsections: About and Testimonials === */}
       <About />
       <Testimonials />
     </div>

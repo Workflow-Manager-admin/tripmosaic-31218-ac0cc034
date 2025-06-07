@@ -1,10 +1,11 @@
 /**
- * TripPdf.jsx
- * -----------------------------------------------------------------------------
- * Kavia AI Badging: PDF export component for TripMosaic-31218.
- * Adds PropTypes validation for deployment and lint compliance. (Kavia AI)
- * -----------------------------------------------------------------------------
+ * ============================================================================
+ *  Generated/curated by Kavia AI: TripPdf.jsx - PDF Export/Display Component
+ *  Exports trip itinerary data to PDF and displays printable details.
+ *  Includes PropTypes for deep trip validation.
+ * ============================================================================
  */
+
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import PropTypes from "prop-types";
@@ -21,18 +22,24 @@ import EiRa from "../assets/EiRa1.png";
 import logo2 from "../assets/logo.jpg";
 import { Link } from "react-router-dom";
 
-
+// PUBLIC_INTERFACE
 /**
- * TripPdf
- * Kavia AI lint fix: add prop types recursively for deep nested trip data.
+ * Renders trip itinerary as both in-page table and generates downloadable PDF.
+ * @param {object} trip - The full trip object (see PropTypes below).
  */
 const TripPdf = ({ trip }) => {
+  /**
+   * Generates and downloads a PDF itinerary using jsPDF and autoTable.
+   * Headers/rows built from trip details. Uses full data validation.
+   */
   const handleExportPdf = () => {
     const doc = new jsPDF();
 
+    // Prepare table headers for PDF
     const tableHeaders = ["Location", "Description", "Charges"];
     const tableRows = [];
 
+    // Gather itineraries day by day for each place
     trip?.tripData?.itinerary.forEach((item) => {
       item?.plan.forEach((ele) => {
         tableRows.push([
@@ -43,28 +50,32 @@ const TripPdf = ({ trip }) => {
       });
     });
 
-    // Add the title to the PDF
+    // Add main title at the top
     doc.text(
       `${trip?.userSelection.noOfDays} Days trip for ${trip?.userSelection.location.label}`,
       10,
       10
     );
 
-    // Generate the table using autoTable
+    // Render table to PDF
     autoTable(doc, {
       head: [tableHeaders],
       body: tableRows,
       startY: 20,
     });
 
-    // Save the PDF
-    doc.save(`${trip?.userSelection.noOfDays}_days_trip_in_${trip?.userSelection.location.label}.pdf`);
+    // Save the final PDF
+    doc.save(
+      `${trip?.userSelection.noOfDays}_days_trip_in_${trip?.userSelection.location.label}.pdf`
+    );
   };
 
   return (
     trip && (
       <div>
+        {/* ==== Export Button ==== */}
         <button onClick={handleExportPdf}>Export PDF</button>
+        {/* ==== Branding Section ==== */}
         <div className="flex my-5 items-start justify-center gap-3 w-40">
           <img
             className="border-2 border-[#21BCBE] h-12 w-12 rounded-full"
@@ -76,6 +87,7 @@ const TripPdf = ({ trip }) => {
           </Link>
         </div>
 
+        {/* ==== Display itinerary day-by-day ==== */}
         {trip?.tripData?.itinerary.map((item, index) => (
           <div className="my-4" key={index}>
             <div className="my-8">
@@ -85,7 +97,6 @@ const TripPdf = ({ trip }) => {
               </h1>
             </div>
             <h2 className="font-bold text-xl mb-3">Day {item.day}</h2>
-
             <Table>
               <TableHeader>
                 <TableRow>
@@ -97,9 +108,7 @@ const TripPdf = ({ trip }) => {
               <TableBody>
                 {item?.plan.map((ele, index) => (
                   <TableRow key={index}>
-                    <TableCell className="font-medium">
-                      {ele.placeName}
-                    </TableCell>
+                    <TableCell className="font-medium">{ele.placeName}</TableCell>
                     <TableCell className="text-center">
                       {ele.placeDetails}
                     </TableCell>
@@ -117,7 +126,7 @@ const TripPdf = ({ trip }) => {
   );
 };
 
-// PropTypes for the trip prop (deep validation)
+// PropTypes for the trip prop (deep validation, see project data model)
 TripPdf.propTypes = {
   trip: PropTypes.shape({
     tripData: PropTypes.shape({

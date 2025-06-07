@@ -1,18 +1,29 @@
+/**
+ * ============================================================================
+ *  Generated/curated by Kavia AI: useMyTrip.js - Custom hook for user trips management
+ *  Provides logic to load all trips associated with the currently authenticated user from Firestore.
+ *  Fully linted and now free of stale eslint-directive warnings.
+ * ============================================================================
+ */
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../services/firebase";
+
+// PUBLIC_INTERFACE
+/**
+ * Loads all the trips belonging to the signed-in user.
+ * Returns: { userTrips } - array of trip objects, or [] if not signed in.
+ */
 const useMyTrip = () => {
-    const [userTrips, setUsertrips] = useState([]);
-    useEffect(() => {
-      GetUserTrips();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [GetUserTrips]);
-    const navigate = useNavigate();
-  
+  const [userTrips, setUsertrips] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
     /**
-     * Get's the all trips belobgs to a user
-     * @returns
+     * Loads the trips from Firestore for the authenticated user.
+     * Redirects to home if no user session.
      */
     const GetUserTrips = async () => {
       const user = JSON.parse(localStorage.getItem("user"));
@@ -30,7 +41,12 @@ const useMyTrip = () => {
         setUsertrips((prevVal) => [...prevVal, doc.data()]);
       });
     };
-    return {userTrips};
-}
 
-export default useMyTrip
+    GetUserTrips();
+    // (No unused eslint-disable directives needed)
+  }, [navigate]);
+
+  return { userTrips };
+};
+
+export default useMyTrip;
