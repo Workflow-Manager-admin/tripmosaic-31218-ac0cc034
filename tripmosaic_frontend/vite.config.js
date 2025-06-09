@@ -26,7 +26,8 @@ export default defineConfig({
   server: {
     allowedHosts: [
       // KAVIA AI deployment: Allow access from cloud internal beta
-      "vscode-internal-175-beta.beta01.cloud.kavia.ai"
+      "vscode-internal-175-beta.beta01.cloud.kavia.ai",
+      "vscode-internal-1098-beta.beta01.cloud.kavia.ai",
     ],
   },
 })
