@@ -7,3 +7,11 @@
 
   ➜  Local:   http://localhost:3000/
   ➜  Network: http://172.17.0.2:3000/
+9:10:57 AM [vite] hmr update /src/components/PlaceCard.jsx, /src/index.css
+9:11:10 AM [vite] hmr update /src/components/PlacesToVisit.jsx, /src/index.css
+9:11:15 AM [vite] page reload src/components/ThemeToggle.jsx
+9:11:16 AM [vite] page reload src/components/ThemeToggle.jsx
+9:11:16 AM [vite] page reload src/components/ThemeToggle.jsx
+9:11:21 AM [vite] hmr update /src/components/ui/dialog.jsx, /src/index.css, /src/components/ui/button.jsx, /src/components/ui/popover.jsx
+9:11:22 AM [vite] hmr update /src/components/ui/dialog.jsx, /src/index.css, /src/components/ui/button.jsx, /src/components/ui/popover.jsx
+9:11:22 AM [vite] hmr update /src/components/ui/dialog.jsx, /src/index.css, /src/components/ui/button.jsx, /src/components/ui/popover.jsx
