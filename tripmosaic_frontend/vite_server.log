@@ -2,9 +2,8 @@
 > travelplanner@0.0.0 dev
 > vite --port 3000
 
-Re-optimizing dependencies because lockfile has changed
 
-  VITE v5.4.7  ready in 982 ms
+  VITE v5.4.7  ready in 389 ms
 
   ➜  Local:   http://localhost:3000/
-  ➜  Network: use --host to expose
+  ➜  Network: http://172.17.0.2:3000/
