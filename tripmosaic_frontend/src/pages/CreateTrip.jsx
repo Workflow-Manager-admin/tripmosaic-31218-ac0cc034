@@ -29,6 +29,7 @@ import {
 } from "@geoapify/react-geocoder-autocomplete";
 import "@geoapify/geocoder-autocomplete/styles/minimal.css";
 import ThemeContext from "../context/ThemeContext";
+
 const CreateTrip = () => {
   const [place, setPlace] = useState(null);
   const [locationInputValue, setLocationInputValue] = useState("");
@@ -129,133 +130,171 @@ const CreateTrip = () => {
   };
 
   return (
-    <div className="my-20 mb-20 px-6 lg:px-56 bg-white text-gray-900 dark:bg-[#0f0f0f] dark:text-white transition-colors duration-300">
-      <div className="flex flex-col gap-6">
-        <h2 className="text-4xl font-bold text-orange-500">{CREATE_TRIP.title}</h2>
-        <p className="text-lg text-gray-600 dark:text-gray-300">{CREATE_TRIP.titleDescription}</p>
+    <div
+      className={`min-h-screen py-12 px-6 flex justify-center items-center bg-gradient-to-tr from-orange-600 via-red-600 to-orange-700 transition-colors duration-500`}
+    >
+      {/* Ticket Container */}
+      <div
+        className="relative max-w-4xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2"
+        style={{ fontFamily: "'Montserrat', sans-serif" }}
+      >
+        {/* Left side - flight info and form */}
+        <div className="p-10 flex flex-col justify-between bg-gradient-to-br from-orange-500 to-red-600 text-white">
+          <div>
+            <img
+              src={logo}
+              alt="Logo"
+              className="w-20 rounded-full mb-8 shadow-lg border-4 border-white"
+            />
+            <h1 className="text-5xl font-extrabold mb-2 tracking-tight leading-tight">
+              {CREATE_TRIP.title}
+            </h1>
+            <p className="text-lg font-light opacity-90 mb-8 max-w-xs">
+              {CREATE_TRIP.titleDescription}
+            </p>
 
-        {/* Destination Selector */}
-<div className="flex flex-col gap-10 mt-10">
-  <div>
-    <h3 className="text-xl my-3 font-semibold">{CREATE_TRIP.destinantionLabel}</h3>
-
-    <div className="w-full">
-  <GeoapifyContext apiKey="06f5c49b0a5045aa84e623035fe2a1a2">
-    <GeoapifyGeocoderAutocomplete
-      placeholder="Enter your destination"
-      placeSelect={(value) => {
-        setPlace(value);
-        handleInputChanges("location", value);
-        setLocationInputValue(value?.properties?.formatted || "");
-      }}
-      value={locationInputValue}
-      className={`border border-gray-300 dark:border-gray-600 w-full p-2 bg-white dark:bg-[#1c1c1c] text-gray-900 dark:text-white rounded-md ${
-        theme === "dark" ? "geoapify-autocomplete-dark" : ""
-      }`}
-    />
-  </GeoapifyContext>
-</div>
-
-    {place?.properties?.formatted && (
-      <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-        📍 Selected: <span className="font-medium">{place.properties.formatted}</span>
-      </p>
-    )}
-  </div>
-</div>
-
-
-        {/* Days Input */}
-        <div>
-          <h3 className="text-xl my-3 font-semibold">{CREATE_TRIP.timeLineLabel}</h3>
-          <input
-            onChange={(e) => handleInputChanges("noOfDays", Number(e.target.value))}
-            value={formData?.noOfDays || ""}
-            className="border border-gray-300 dark:border-gray-600 w-full p-2 bg-white dark:bg-transparent text-gray-900 dark:text-white rounded-md"
-            placeholder="Ex. 3"
-            type="number"
-            min={1}
-            max={10}
-          />
-        </div>
-
-        {/* No of People */}
-        <div>
-          <h3 className="text-xl font-semibold">{CREATE_TRIP.noOfPeopleLabel}</h3>
-          <div className="flex lg:flex-row flex-col gap-6 mt-6">
-            {SELECT_TRAVEL_LIST.map((listItem) => (
-              <div
-                key={listItem.id}
-                onClick={() => handleInputChanges("noOfPeople", listItem.people)}
-                className={`flex flex-col gap-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#1c1c1c] text-gray-900 dark:text-white rounded-md px-4 py-3 cursor-pointer hover:shadow-lg
-                  ${
-                    formData?.noOfPeople === listItem.people
-                      ? "border-orange-500 scale-105 transition duration-100"
-                      : ""
-                  }`}
-              >
-                <h2 className="text-2xl">{listItem.icon}</h2>
-                <h3 className="text-xl font-semibold">{listItem.title}</h3>
-                <p className="text-gray-500 dark:text-gray-400">{listItem.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>   
-
-        {/* Budget Options */}
-        <div>
-          <h3 className="text-xl font-semibold">{CREATE_TRIP.budgetLabel}</h3>
-          <div className="flex lg:flex-row flex-col gap-6 mt-6">
-            {SELECT_BUDGET_OPTIONS.map((listItem) => (
-              <div
-                key={listItem.id}
-                onClick={() => handleInputChanges("budget", listItem.title)}
-                className={`flex flex-col gap-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#1c1c1c] text-gray-900 dark:text-white rounded-md px-4 py-3 cursor-pointer hover:shadow-lg
-                  ${
-                    formData?.budget === listItem.title
-                      ? "border-orange-500 scale-105 transition duration-100"
-                      : ""
-                  }`}
-              >
-                <h2 className="text-2xl">{listItem.icon}</h2>
-                <h3 className="text-xl font-semibold">{listItem.title}</h3>
-                <p className="text-gray-500 dark:text-gray-400">{listItem.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Plan My Trip Button */}
-        <div className="flex justify-end mt-10">
-          <Button
-            disabled={loading}
-            className="px-6 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold hover:opacity-90 transition duration-200"
-            onClick={generateTrip}
-          >
-            {loading ? (
-              <AiOutlineLoading3Quarters className="h-6 w-6 animate-spin" />
-            ) : (
-              "Plan My Trip"
+            {/* Destination Selector */}
+            <label className="block mb-4 font-semibold text-lg">
+              Destination
+            </label>
+            <GeoapifyContext apiKey="06f5c49b0a5045aa84e623035fe2a1a2">
+              <GeoapifyGeocoderAutocomplete
+                placeholder="Where are you headed?"
+                placeSelect={(value) => {
+                  setPlace(value);
+                  handleInputChanges("location", value);
+                  setLocationInputValue(value?.properties?.formatted || "");
+                }}
+                value={locationInputValue}
+                className="w-full p-3 rounded-xl text-black border-2 border-white focus:outline-none focus:ring-4 focus:ring-orange-300 transition"
+              />
+            </GeoapifyContext>
+            {place?.properties?.formatted && (
+              <p className="mt-2 italic opacity-80">
+                Selected:{" "}
+                <span className="font-semibold">{place.properties.formatted}</span>
+              </p>
             )}
-          </Button>
+
+            {/* Days Input */}
+            <label className="block mt-6 mb-2 font-semibold text-lg">
+              Trip Duration (Days)
+            </label>
+            <input
+              onChange={(e) => handleInputChanges("noOfDays", Number(e.target.value))}
+              value={formData?.noOfDays || ""}
+              className="w-full p-3 rounded-xl text-black border-2 border-white focus:outline-none focus:ring-4 focus:ring-orange-300 transition"
+              placeholder="Max 10 days"
+              type="number"
+              min={1}
+              max={10}
+            />
+          </div>
+
+          {/* Plan Button */}
+          <div className="mt-10">
+            <Button
+              disabled={loading}
+              onClick={generateTrip}
+              className={`w-full py-4 rounded-full font-bold text-xl shadow-lg transition-transform duration-300 transform hover:scale-105 ${
+                loading
+                  ? "bg-gray-400 cursor-not-allowed text-gray-700"
+                  : "bg-white text-orange-600 hover:bg-orange-100"
+              }`}
+            >
+              {loading ? (
+                <div className="flex items-center justify-center gap-3">
+                  <AiOutlineLoading3Quarters className="animate-spin" />
+                  Crafting Your Adventure...
+                </div>
+              ) : (
+                "Plan My Epic Trip!"
+              )}
+            </Button>
+          </div>
+        </div>
+
+        {/* Right side - Travelers and Budget cards */}
+        <div className="p-10 bg-white">
+          {/* Travelers */}
+          <section>
+            <h2 className="text-3xl font-bold text-orange-600 mb-6">
+              Who Are You Traveling With?
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {SELECT_TRAVEL_LIST.map((listItem) => (
+                <div
+                  key={listItem.id}
+                  onClick={() => handleInputChanges("noOfPeople", listItem.people)}
+                  className={`cursor-pointer rounded-xl border-2 p-6 flex flex-col items-center justify-center text-center transition-shadow duration-300
+                    ${
+                      formData?.noOfPeople === listItem.people
+                        ? "border-orange-500 shadow-lg scale-105"
+                        : "border-gray-300 hover:border-orange-400 hover:shadow-md"
+                    }
+                  `}
+                >
+                  <span className="text-6xl mb-3">{listItem.icon}</span>
+                  <h3 className="text-xl font-semibold text-orange-700">
+                    {listItem.title}
+                  </h3>
+                  <p className="text-sm text-gray-600">{listItem.desc}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Budget */}
+          <section className="mt-12">
+            <h2 className="text-3xl font-bold text-red-600 mb-6">
+              What's Your Estimated Budget?
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {SELECT_BUDGET_OPTIONS.map((listItem) => (
+                <div
+                  key={listItem.id}
+                  onClick={() => handleInputChanges("budget", listItem.title)}
+                  className={`cursor-pointer rounded-xl border-2 p-6 flex flex-col items-center justify-center text-center transition-shadow duration-300
+                    ${
+                      formData?.budget === listItem.title
+                        ? "border-red-500 shadow-lg scale-105"
+                        : "border-gray-300 hover:border-red-400 hover:shadow-md"
+                    }
+                  `}
+                >
+                  <span className="text-6xl mb-3">{listItem.icon}</span>
+                  <h3 className="text-xl font-semibold text-red-700">
+                    {listItem.title}
+                  </h3>
+                  <p className="text-sm text-gray-600">{listItem.desc}</p>
+                </div>
+              ))}
+            </div>
+          </section>
         </div>
 
         {/* Login Dialog */}
         <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-          <DialogContent>
-            <DialogHeader>
-              <DialogDescription>
-                <img className="w-16 mx-auto" src={logo} alt="Logo" />
-                <h2 className="font-bold text-lg mt-4 text-center">{CREATE_TRIP.signInLabel}</h2>
-                <p className="mt-2 text-center">{CREATE_TRIP.signInDescription}</p>
-                <Button
-                  onClick={login}
-                  className="flex font-bold items-center gap-4 w-full mt-4 justify-center"
-                >
-                  {CREATE_TRIP.signInButtonLabel}
-                  <FcGoogle className="w-7 h-7" />
-                </Button>
+          <DialogContent className="rounded-2xl p-8 max-w-md mx-auto shadow-2xl bg-white text-gray-900 transition-colors duration-300">
+            <DialogHeader className="text-center">
+              <img
+                className="w-24 h-24 mx-auto mb-5 rounded-full shadow-md"
+                src={logo}
+                alt="Logo"
+              />
+              <h2 className="font-extrabold text-4xl text-orange-600 mb-3">
+                {CREATE_TRIP.signInLabel}
+              </h2>
+              <DialogDescription className="text-lg text-gray-600 mb-8 leading-relaxed">
+                {CREATE_TRIP.signInDescription}
               </DialogDescription>
+              <Button
+                onClick={login}
+                className="flex items-center justify-center gap-4 w-full py-4 rounded-xl text-xl font-bold bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300 transform hover:scale-[1.02] shadow-lg"
+              >
+                <FcGoogle className="w-8 h-8" />
+                {CREATE_TRIP.signInButtonLabel}
+              </Button>
             </DialogHeader>
           </DialogContent>
         </Dialog>

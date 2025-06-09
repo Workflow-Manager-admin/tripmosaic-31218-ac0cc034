@@ -3,22 +3,28 @@
 > vite --port 3000
 
 
-  VITE v5.4.7  ready in 438 ms
+  VITE v5.4.7  ready in 408 ms
 
   ➜  Local:   http://localhost:3000/
   ➜  Network: http://172.17.0.2:3000/
-9:10:57 AM [vite] hmr update /src/components/PlaceCard.jsx, /src/index.css
-9:11:10 AM [vite] hmr update /src/components/PlacesToVisit.jsx, /src/index.css
-9:11:15 AM [vite] page reload src/components/ThemeToggle.jsx
-9:11:16 AM [vite] page reload src/components/ThemeToggle.jsx
-9:11:16 AM [vite] page reload src/components/ThemeToggle.jsx
-9:11:21 AM [vite] hmr update /src/components/ui/dialog.jsx, /src/index.css, /src/components/ui/button.jsx, /src/components/ui/popover.jsx
-9:11:22 AM [vite] hmr update /src/components/ui/dialog.jsx, /src/index.css, /src/components/ui/button.jsx, /src/components/ui/popover.jsx
-9:11:22 AM [vite] hmr update /src/components/ui/dialog.jsx, /src/index.css, /src/components/ui/button.jsx, /src/components/ui/popover.jsx
-9:11:53 AM [vite] hmr update /src/pages/CreateTrip.jsx, /src/index.css, /src/components/Footer.jsx, /src/pages/Hero.jsx, /src/components/InfoSection.jsx, /src/components/UserTripCard.jsx, /src/components/HotelCardItem.jsx, /src/components/PlaceCard.jsx, /src/pages/About.jsx, /src/pages/Testimonials.jsx
-9:12:00 AM [vite] hmr update /src/pages/ViewTrip.jsx, /src/index.css
-9:12:01 AM [vite] hmr update /src/pages/ViewTrip.jsx, /src/index.css
-9:12:01 AM [vite] hmr update /src/pages/ViewTrip.jsx, /src/index.css
-9:12:06 AM [vite] hmr update /src/pages/MyTrips.jsx, /src/index.css
-9:12:44 AM [vite] hmr update /src/components/PlaceCard.jsx, /src/index.css
-9:12:44 AM [vite] page reload src/components/ThemeToggle.jsx
+9:15:16 AM [vite] hmr update /src/pages/ViewTrip.jsx, /src/index.css
+9:15:16 AM [vite] hmr update /src/pages/Testimonials.jsx, /src/index.css
+9:15:17 AM [vite] hmr update /src/pages/MyTrips.jsx, /src/index.css
+9:15:19 AM [vite] hmr update /src/pages/Hero.jsx, /src/index.css
+9:15:19 AM [vite] hmr update /src/pages/CreateTrip.jsx, /src/index.css
+9:15:19 AM [vite] hmr update /src/pages/About.jsx, /src/index.css
+9:15:20 AM [vite] hmr update /src/pages/ViewTrip.jsx
+9:15:20 AM [vite] hmr update /src/pages/Testimonials.jsx
+9:15:20 AM [vite] hmr update /src/pages/MyTrips.jsx
+9:15:21 AM [vite] hmr update /src/pages/Hero.jsx
+9:15:21 AM [vite] hmr update /src/pages/CreateTrip.jsx
+9:15:21 AM [vite] hmr update /src/pages/About.jsx
+9:16:19 AM [vite] page reload src/main.jsx
+9:16:20 AM [vite] hmr update /src/index.css
+9:16:20 AM [vite] hmr update /src/App.jsx
+9:16:20 AM [vite] Pre-transform error: Failed to load url /src/main.jsx (resolved id: /home/kavia/workspace/code-generation/tripmosaic-31218-ac0cc034/tripmosaic_frontend/src/main.jsx). Does the file exist?
+9:16:20 AM [vite] page reload src/main.jsx
+9:16:20 AM [vite] page reload src/main.jsx
+9:16:21 AM [vite] page reload src/main.jsx
+9:16:22 AM [vite] hmr update /src/App.jsx
+9:16:22 AM [vite] hmr update /src/index.css
