@@ -1,3 +1,23 @@
+/**
+ * ============================================================================
+ *  constants.js (TripMosaic Vistara) - Global UI/content constants for the app.
+ *  This module centralizes all UI text, prompts, table structure, and enum constants
+ *  used throughout the frontend. Update these for localization, future A/B tests, or
+ *  if requirements change—keeping all user-facing text in one place.
+ *
+ *  Groups:
+ *   - HERO: Landing/hero section content.
+ *   - ABOUT_TEXT: About page summary/CTA.
+ *   - TESTIMONIALS: Customer testimonials/quotes.
+ *   - CREATE_TRIP: Form/flow field labels and error text.
+ *   - SELECT_TRAVEL_LIST, SELECT_BUDGET_OPTIONS: Option lists for forms.
+ *   - GENERATE_TRIP_PROMPT: Gemini AI prompt template.
+ *   - PHOTO_REF_URL: Google Places media endpoint.
+ *   - FOOTER_DESCRIPTION: Copyright/footer attribution.
+ * ============================================================================
+ */
+
+/** Content for the homepage hero/introduction section. */
 export const HERO = {
   title: "Hi, I'm Vistara, your personal travel planner",
   titleDescription:
@@ -5,6 +25,7 @@ export const HERO = {
   buttonLable: "Start Planning Your Trip for Free",
 };
 
+/** Content for the app About/Info/CTA section. */
 export const ABOUT_TEXT = {
   title: "Smarter planning. Better travel. Powered by AI.",
   buttonLable: "Plan a New Trip",
@@ -12,6 +33,7 @@ export const ABOUT_TEXT = {
     "Meet Vistara, your intelligent travel companion. Whether you're looking for must-see attractions, the perfect accommodations, flights, or road trips—Vistara simplifies your journey from idea to itinerary. Say goodbye to tab overload and disorganized travel tools. Just share your preferences and let Vistara create personalized travel experiences, complete with expert suggestions and curated content. Your next unforgettable trip starts here.",
 };
 
+/** Testimonials: strings for display on Testimonials page. */
 export const TESTIMONIALS = {
   title: "What Travelers Are Saying About Vistara",
   review1:
@@ -26,6 +48,7 @@ export const TESTIMONIALS = {
     "Planning a holiday has never been this easy. Vistara created a seamless itinerary and inspired me with stunning destination ideas and videos!",
 };
 
+/** Labels and error messages for CreateTrip form/flow. */
 export const CREATE_TRIP = {
   title: "Ready for your next great escape? 🌅✈️",
   titleDescription:
@@ -43,6 +66,10 @@ export const CREATE_TRIP = {
   budget: "{budget}",
 };
 
+/**
+ * Option list for selector buttons in trip creation:
+ * "Who is travelling?" - maps to forms radio/buttons.
+ */
 export const SELECT_TRAVEL_LIST = [
   {
     id: 1,
@@ -74,6 +101,7 @@ export const SELECT_TRAVEL_LIST = [
   },
 ];
 
+/** Option list for "budget" field in the trip planner flow. */
 export const SELECT_BUDGET_OPTIONS = [
   {
     id: 1,
@@ -95,10 +123,19 @@ export const SELECT_BUDGET_OPTIONS = [
   },
 ];
 
+/**
+ * Prompt template for AI itinerary generation (Gemini API).
+ *  Replace braces {} with values using .replace before calling the API.
+ */
 export const GENERATE_TRIP_PROMPT =
   "Generate a travel plan for location: {location}, for {noOfDays} days for {noOfPeople} with a {budget} budget. Provide a hotel list including hotel name, address, price, image URL, geo-coordinates, rating, and descriptions. Also, suggest a detailed itinerary including place name, place details, image URL, geo-coordinates, ticket pricing, and travel time. Format the result in JSON with an array structure, with day-by-day plans and optimal visiting times.";
 
+/**
+ * Google Places API URL template for image/photo fetching.
+ * Replace {NAME} with the photo reference key from API results.
+ */
 export const PHOTO_REF_URL =
   "https://places.googleapis.com/v1/{NAME}/media?maxHeightPx=2000&maxWidthPx=2000&key=AIzaSyCYJiw6Cf4JEQ_ybTzw9iXwBZOtKIKYl3s";
 
+/** Copyright/footer note (shows at site bottom) */
 export const FOOTER_DESCRIPTION = "© 2025 All rights reserved by Vistara";

@@ -18,14 +18,14 @@ import placeholder from "../assets/placeholder.jpg";
  * @param {object} place - Place info and metadata (placeName, placeDetails, etc.).
  */
 const PlaceCard = ({ place }) => {
-  // Defensive: Don't render if place is not supplied
-  if (!place) return null;
-
-  // Compose the data query for usePlacePhoto
+  // Compose the data query for usePlacePhoto (hook must run every render, before early returns)
   const data = {
     textQuery: place?.placeName,
   };
   const photoURL = usePlacePhoto(place, data);
+
+  // Defensive: Don't render if place is not supplied
+  if (!place) return null;
 
   // Build Google Maps search link for the place
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place?.placeName ?? "")}`;

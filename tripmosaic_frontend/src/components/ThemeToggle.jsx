@@ -1,6 +1,5 @@
 // components/ThemeToggle.jsx
 
-import PropTypes from "prop-types";
 import { useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
 

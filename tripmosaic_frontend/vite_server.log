@@ -15,3 +15,10 @@
 9:11:21 AM [vite] hmr update /src/components/ui/dialog.jsx, /src/index.css, /src/components/ui/button.jsx, /src/components/ui/popover.jsx
 9:11:22 AM [vite] hmr update /src/components/ui/dialog.jsx, /src/index.css, /src/components/ui/button.jsx, /src/components/ui/popover.jsx
 9:11:22 AM [vite] hmr update /src/components/ui/dialog.jsx, /src/index.css, /src/components/ui/button.jsx, /src/components/ui/popover.jsx
+9:11:53 AM [vite] hmr update /src/pages/CreateTrip.jsx, /src/index.css, /src/components/Footer.jsx, /src/pages/Hero.jsx, /src/components/InfoSection.jsx, /src/components/UserTripCard.jsx, /src/components/HotelCardItem.jsx, /src/components/PlaceCard.jsx, /src/pages/About.jsx, /src/pages/Testimonials.jsx
+9:12:00 AM [vite] hmr update /src/pages/ViewTrip.jsx, /src/index.css
+9:12:01 AM [vite] hmr update /src/pages/ViewTrip.jsx, /src/index.css
+9:12:01 AM [vite] hmr update /src/pages/ViewTrip.jsx, /src/index.css
+9:12:06 AM [vite] hmr update /src/pages/MyTrips.jsx, /src/index.css
+9:12:44 AM [vite] hmr update /src/components/PlaceCard.jsx, /src/index.css
+9:12:44 AM [vite] page reload src/components/ThemeToggle.jsx
