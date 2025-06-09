@@ -14,17 +14,29 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from 'tailwindcss'
 import path from "path"
+import { fileURLToPath } from 'url'
 
 // https://vitejs.dev/config/
+
+// ESM-safe directory resolution for use in Vite config:
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+/**
+ * Vite server configuration policy:
+ * - Vite v5.4.x (see package.json) only supports `server.host`, not `allowedHosts`.
+ * - Setting host: true exposes the dev server to all interfaces (0.0.0.0).
+ * - This allows connectivity from remote hosts, e.g.: vscode-internal-1098-beta.beta01.cloud.kavia.ai.
+ * - For restricting allowed hosts, further changes may be done at the reverse proxy/firewall.
+ */
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  alias: {
-    "@": path.resolve(import.meta.url, "./src"),
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src"), // support "@" alias for src resolution
+    },
   },
   server: {
-    host: true, // Allow serving Vite on all interfaces (enables cloud/external host access)
-    // Removal of server.allowedHosts — not supported in Vite 4/5
-    // To allow remote hosts such as vscode-internal-1098-beta.beta01.cloud.kavia.ai, set host: true or host: "0.0.0.0"
-    // For specific host allowance, reverse proxy or firewall configuration may be required.
+    host: true, // Exposes Vite to all interfaces (also accepts '0.0.0.0'), supports cloud dev environments
+    // Note: allowedHosts is NOT supported in Vite >= 4.0.0
   },
 })
