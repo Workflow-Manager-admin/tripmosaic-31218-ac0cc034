@@ -23,7 +23,8 @@ export default defineConfig({
   },
   server: {
     host: true, // Allow serving Vite on all interfaces (enables cloud/external host access)
-    // allowedHosts: is NOT a valid Vite option, it was for Webpack or old setups!
-    // See: https://vitejs.dev/config/server-options.html#server-host
+    // Removal of server.allowedHosts — not supported in Vite 4/5
+    // To allow remote hosts such as vscode-internal-1098-beta.beta01.cloud.kavia.ai, set host: true or host: "0.0.0.0"
+    // For specific host allowance, reverse proxy or firewall configuration may be required.
   },
 })
