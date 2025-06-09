@@ -1,15 +1,13 @@
 /**
  * Vite Configuration for TripMosaic-31218 (Kavia AI)
- * Kavia AI Badging: Deployment-ready config with explicit allowedHosts for secure internal access.
- * -----------------------------------------------------------------------------
- * Features: 
- *   - React & TailwindCSS integration
- *   - Path alias for "@/src"
- *   - COMPLIANT: Allows 'vscode-internal-175-beta.beta01.cloud.kavia.ai' internal host for deployment
- *   - Uncomment/modify allowedHosts for custom deployment needs
- * 
+ * Updated for Vite v5—secure and modern host allowance.
+ * --------------------------------------------------------------------------
+ * This config enables all hosts for cloud/editor development (host bug fix).
+ * - Path alias for '@/src'
+ * - React & TailwindCSS plugin integration
+ *
  * © 2025 Kavia AI | tripmosaic-31218-ac0cc034
- * -----------------------------------------------------------------------------
+ * --------------------------------------------------------------------------
  */
 
 import { defineConfig } from 'vite'
@@ -24,10 +22,8 @@ export default defineConfig({
     "@": path.resolve(import.meta.url, "./src"),
   },
   server: {
-    allowedHosts: [
-      // KAVIA AI deployment: Allow access from cloud internal beta
-      "vscode-internal-175-beta.beta01.cloud.kavia.ai",
-      "vscode-internal-1098-beta.beta01.cloud.kavia.ai",
-    ],
+    host: true, // Allow serving Vite on all interfaces (enables cloud/external host access)
+    // allowedHosts: is NOT a valid Vite option, it was for Webpack or old setups!
+    // See: https://vitejs.dev/config/server-options.html#server-host
   },
 })
