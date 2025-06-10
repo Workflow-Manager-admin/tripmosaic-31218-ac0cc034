@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import {
   SELECT_TRAVEL_LIST,
   SELECT_BUDGET_OPTIONS,
@@ -28,7 +28,7 @@ import {
   GeoapifyContext,
 } from "@geoapify/react-geocoder-autocomplete";
 import "@geoapify/geocoder-autocomplete/styles/minimal.css";
-import ThemeContext from "../context/ThemeContext";
+
 
 const CreateTrip = () => {
   const [place, setPlace] = useState(null);
@@ -36,7 +36,7 @@ const CreateTrip = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { theme } = useContext(ThemeContext);
+  // const { theme } = useContext(ThemeContext);
 
   const { handleInputChanges, formData } = useForm();
 
@@ -247,7 +247,7 @@ const CreateTrip = () => {
           {/* Budget */}
           <section className="mt-12">
             <h2 className="text-3xl font-bold text-red-600 mb-6">
-              What's Your Estimated Budget?
+              What&apos;s Your Estimated Budget?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {SELECT_BUDGET_OPTIONS.map((listItem) => (
