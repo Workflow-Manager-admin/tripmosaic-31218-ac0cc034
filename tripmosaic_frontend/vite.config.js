@@ -37,6 +37,13 @@ export default defineConfig({
   },
   server: {
     host: true, // Exposes Vite to all interfaces (also accepts '0.0.0.0'), supports cloud dev environments
-    // Note: allowedHosts is NOT supported in Vite >= 4.0.0
+    // Explicit block workaround: allow specific host(s) for cloud/dev editors (Vite v5+ does not "document" allowedHosts, but it is still accepted)
+    allowedHosts: [
+      "vscode-internal-67-beta.beta01.cloud.kavia.ai",
+      "localhost",
+      "127.0.0.1",
+      ".cloud.kavia.ai",         // Wildcard to cover similar editors/host patterns
+      "0.0.0.0"
+    ],
   },
 })
