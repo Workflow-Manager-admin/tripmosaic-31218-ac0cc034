@@ -61,9 +61,18 @@ export default defineConfig({
      */
   },
   // ---- BASE PATH for RELATIVE ASSETS ----
-  // Use '/' (absolute) for production, or './' for best cross-platform dev (relative to index.html)
-  // If assets load with 404, try toggling between './' and '/'!
-  base: './',
+  // Use '/' (absolute) for most production and cloud IDE setups to ensure assets resolve correctly
+  // If assets load with 404, you may "try" './', but '/' is required for most dev environments with proxy/reverse proxy!
+  base: '/',
+
+  // NOTE: If you are using a cloud IDE (GitHub Codespaces, Kavia, Replit, Gitpod) and see 404s for /src/main.jsx,
+  // /@vite/client, or HMR/WebSocket issues, double-check:
+  //  1. Your cloud IDE's port forwarding is exposing port 5173 to the public/in your browser.
+  //  2. Your dev server is bound to host: '0.0.0.0' (as above!), not just localhost.
+  //  3. Your environment does not double-proxy (if it does, ask support for "custom base" or proxy/HMR settings).
+  //  4. If HMR fails but assets load, your proxy may not support WebSockets—search cloud IDE docs for Vite/Cra/React.
+  //  5. For self-built reverse proxies, also set server.hmr / hmr.host as needed (uncommon).
+  //  6. For production static hosting, the vercel.json SPA rewrite is correct.
   
   // ---- Remove Service Worker (PWA) By Default ----
   // Vite does not register a service worker out of the box.
