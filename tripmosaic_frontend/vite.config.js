@@ -35,6 +35,7 @@ export default defineConfig({
     port: 5173,       // Set a fixed port so your workspace’s port forwarding is predictable
     strictPort: true, // Fail if port is in use—cloud IDEs sometimes force a single allowed port
     cors: true,
+    allowedHosts: "all", // Allow all hosts for dev/preview server to resolve blocked request errors.
     /* 
      * If your provider requires whitelisted hosts for HMR, add them here:
      * Some cloud IDEs use custom domains, or .cloud.kavia.ai, etc.
